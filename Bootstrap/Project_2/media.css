@@ -1,0 +1,20 @@
+
+@media screen and (max-width: 480px) {
+	header section nav .item {
+	  width: 100%;
+	  text-align: center;
+	}
+	header section nav .logo {
+		width: 100%;
+	  text-align: center;
+	}
+	.third  .int{
+		font-size: 20px;
+	}
+	
+	
+	.flot{
+		width:220px;
+	}
+
+  }
