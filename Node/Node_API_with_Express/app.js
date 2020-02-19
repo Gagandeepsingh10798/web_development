@@ -24,6 +24,9 @@ module.exports = function(app) {
     app.delete('/users/:uid', function (req, res) {
         services.deleteUser(req,res)
     });
+    app.all('*', function(req, res) {
+        res.send("invalid url " + String(req.url));
+      });
 
 }
 
