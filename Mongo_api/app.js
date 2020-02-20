@@ -23,6 +23,22 @@ module.exports = function(app) {
     });
    // add user to database
    
+   
+   // update user from database
+    app.put('/users/update', function (req, res) {
+        
+        services.updateUser(req,res);
+    });
+   // update user from database
+   
+   
+   // delete user from database
+    app.post('/users/delete', function (req, res) {
+        
+        services.deleteUser(req,res);
+    });
+   // delete user from database
+   
     app.all('*', function(req, res) {
         res.send("invalid url " + String(req.url));
       });

@@ -7,7 +7,7 @@
 
 
 <form action="http://localhost:3000/users" method="POST">
-  
+  <h2>ADD USER</h2>
   
     
     <input type="text" id="f_name" name="f_name" placeholder="Enter first name.....">  
@@ -26,13 +26,39 @@
 <input type="submit" value="Submit">
 </form>
 
-<br>
+
 
 <form action="http://localhost:3000/users" method="GET">
+<h2>GET ALL USERS</h2>
 <input type="submit" value="SHOW ALL USERS">
 </form>
 
 
+<form action="http://localhost:3000/users/update" method="PUT">
+  
+ <h2>UPDATE USER BY email-ID</h2>
+    
+    <input type="text" id="f_name" name="f_name" placeholder="Enter first name.....">  
+    <input type="text" id="l_name" name="l_name" placeholder="Enter last name.....">
+    
+   
+    <input type="email" id="email" name="email" placeholder="Your email..">
+    <input type="password" id="password" name="password" placeholder="Enter password.....">  
+    <input type="text" id="address" name="address" placeholder="Enter address.....">
+    <input type="text" id="city" name="city" placeholder="Your city..">    
+    <input type="text" id="state" name="state" placeholder="Your state..">  
+    <input type="text" id="zipcode" name="zipcode" placeholder="Your zipcode..">    
+    <input type="text" id="country" name="country" placeholder="Your country..">  
+
+
+<input type="submit" value="Submit">
+</form>
+<form action="http://localhost:3000/users/delete" method="POST">
+  
+ <h2>Delete USER BY email-ID</h2>
+    <input type="email" id="email" name="email" placeholder="Your email..">
+<input type="submit" value="Submit">
+</form>
 
 </body>
 </html>

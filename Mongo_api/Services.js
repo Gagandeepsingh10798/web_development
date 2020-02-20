@@ -34,9 +34,10 @@ exports.addUser = (req,res)=>{
   var data = new formData(content);
 
 
-
-  data.findOne({email: content.email}, function (err, docs) {
-    if(err){
+    
+  formData.findOne({email: data.email}, function (err, docs) {
+      console.log(docs)
+    if(docs === null){
       data.save(function (err, data) {
         if (err) return console.error(err);
         res.send('data added successfully');
@@ -63,7 +64,65 @@ exports.getUsers = (res)=>{
     ids =  data;
   });
   setTimeout(() => {
-    res.send(ids);},200);
+    res.send("all users are :  <br>"+ ids);},200);
   },200);
   
 }
+
+
+
+
+exports.updateUser = (req,res)=>{
+
+  var content;
+  content = req.body;
+  setTimeout(() => {
+    // a document instance
+
+      formData.findOneAndUpdate({email: content.email},content,{new: true},function (err, doc) {
+           if (doc === null) {
+
+        res.send("email not exist");
+
+    } else {
+       res.send("user updated");
+
+    }
+      });
+    
+      
+
+  
+},200);}
+
+
+
+
+
+
+
+
+exports.deleteUser = (req,res)=>{
+
+  var content;
+  content = req.body
+  
+  setTimeout(() => {
+    // a document instance
+
+      formData.deleteOne({email: content.email},function (err, doc) {
+          console.log(doc);
+           if (doc.deletedCount === 0) {
+
+        res.send("email not exist");
+
+    } else {
+       res.send("user deleted");
+
+    }
+      });
+    
+      
+
+  
+},200);}
