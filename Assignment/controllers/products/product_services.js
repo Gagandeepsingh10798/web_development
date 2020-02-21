@@ -90,7 +90,7 @@ exports.update_product = (req,res)=>{
 exports.show_user_products = (req,res)=>{
     
     var u_id = req.params.id
-    db_product.findOne({obj_id : u_id},function(err,doc){
+    db_product.findOne({p_id : u_id},function(err,doc){
        if(doc!==null && doc!==undefined ){
         db_review.find({product_id: doc['p_id']},function(err,docss){
           if(docss.length){
