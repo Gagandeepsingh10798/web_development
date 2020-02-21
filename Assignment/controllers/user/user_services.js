@@ -6,22 +6,13 @@ exports.register = (req,res)=>{
 
   var content = JSON.parse(req.body.toString())
 
-  db_product.find({email: content.email}, function (err, docs) {
-  if(docs.length){
-     var obj = new db({
-      f_name: content.f_name,
-      l_name: content.l_name,
-      email: content.email,
-      password: Bcrypt.hashSync(content.password, 10),
-      products:docs
-    })
-    obj.save((err,data)=>{
-      if(!err){res.send('user registered')}
-      else{res.send(err)}
-    })
+  db.findOne({email: content.email}, function (err, docs) {
+  if(docs !== null){
+    res.send('email already used')
+     
   }
   else{
-       var obj = new db({
+    var obj = new db({
       f_name: content.f_name,
       l_name: content.l_name,
       email: content.email,
@@ -93,7 +84,24 @@ exports.get_user = (req,res)=>{
         res.send("user not exist");
 
     } else {
-       res.send(data);
+      db_product.find({obj_id: u_id},function(err,docss){
+        if(!err){
+          var z = []
+          for(k of docss){
+          var keys =['_id','p_id'],value = [k['_id'],k['p_id']] ,obj={}
+          keys.forEach(function (k, i) {
+            obj[k] = value[i];
+        })
+        z.push(obj)
+      }
+          data.products = z
+          res.send(data)
+        }
+        else{
+          res.send(data)
+        }
+      })
+       
 
     }
   });
