@@ -1,0 +1,89 @@
+{
+
+"f_name":"Gagan",
+"l_name":"Singh",
+"email":"gagan@gmail.com",
+"password":"gagan"
+
+
+}
+
+//user registration
+
+
+{
+
+"f_name":"Love",
+"l_name":"Tyagi",
+
+}
+
+
+//user updation
+
+
+
+{
+
+"email":"gagan@gmail.com",
+"passsword":"gagan",
+"token":"supersecret"
+
+}
+
+//login
+
+
+
+{
+
+"p_id":"1",
+"p_name":"Book",
+"p_desc":"books are good for mind",
+"p_img":"image path"
+
+}
+
+
+// product registration
+
+
+
+{
+
+"p_name":"Book",
+"p_desc":"books are good for mind",
+"p_img":"image path"
+
+
+}
+
+
+//product updation
+
+
+
+{
+
+"review_id":"1",
+"review_message":"best book for children"
+
+}
+
+
+{
+
+"review_id":"2",
+"review_message":"best book for boys"
+
+}
+
+{
+
+"review_id":"3",
+"review_message":"best book for girls"
+
+}
+// add review
+
+
