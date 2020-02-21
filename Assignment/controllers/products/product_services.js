@@ -94,11 +94,14 @@ exports.show_user_products = (req,res)=>{
        if(doc!==null && doc!==undefined ){
         db_review.find({product_id: doc['p_id']},function(err,docss){
           if(docss.length){
-            var keys =['_id','review_id','review_message'],value = [docss[0]['_id'],docss[0]['review_id'],docss[0]['review_message']] ,obj={}
+            var z = []
+            for(k of docss){
+            var keys =['_id','review_id','review_message'],value = [k['_id'],k['review_id'],k['review_message']] ,obj={}
             keys.forEach(function (k, i) {
               obj[k] = value[i];
           })
-            doc.reviews = [obj]
+        z.push(obj)}
+            doc.reviews = z
             res.send(doc)
           }
           else{
