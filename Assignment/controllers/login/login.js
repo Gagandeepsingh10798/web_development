@@ -7,16 +7,18 @@ var jwt = require('jsonwebtoken')
 
 router.post('/login', function (req, res) {
 
-  
-  var tokens = JSON.parse(req.body.toString()).token
-  if(tokens===undefined){
-    tokens = ' '
+  if(req.headers.token){
+    services.log_in(req,res,req.headers.token)
   }
-
-  //jwt token creation
-  var token = jwt.sign({email:JSON.parse(req.body.toString()).email},tokens,{expiresIn: 120});
-    services.log_in(req,res,token)
+  else{
+    services.tokenizer(req,res)
+  }
+ 
+ 
+  
 })
   
-  
+
+
+
 module.exports = router;
