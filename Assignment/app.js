@@ -8,8 +8,18 @@ module.exports = function(app) {
 
     app.use(bodyParser.text())
 
-    app.use('/api/user',user);
+    app.use('/api/auth/register',user);
     app.use('/api/auth',login);
+
+
+    const checkAuth = (req,res,next)=>{
+        if(!req.headers.token){
+          res.send('unauthorized user')
+        }
+        
+          next();
+    }
+    app.use(checkAuth)
     app.use('/api/product',product);
     app.use('/api/review',review);
 
