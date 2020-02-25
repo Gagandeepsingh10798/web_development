@@ -8,7 +8,7 @@ var jwt = require('jsonwebtoken')
 router.post('/login', function (req, res) {
 
   if(req.headers.token){
-    services.log_in(req,res,req.headers.token)
+    services.log_in(req,res)
   }
   else{
     services.tokenizer(req,res)
