@@ -2,67 +2,60 @@ const Bcrypt = require("bcryptjs");
 var db = require('../../models/schemas/user_schema')
 var db_product = require('../../models/schemas/product_schema')
 
-exports.register = (req,res)=>{
+var jwt = require('jsonwebtoken')
 
-  var content = JSON.parse(req.body.toString())
+exports.users = (req,res)=>{
+    
 
-  db.findOne({email: content.email}, function (err, docs) {
-  if(docs !== null){
-    res.send('email already used')
-     
+  
+ db.find({},function(err,data){
+
+  if(!err){
+ res.send({"success":true,"status":200,"message":'all users',"data":data})
   }
   else{
-    var obj = new db({
-      f_name: content.f_name,
-      l_name: content.l_name,
-      email: content.email,
-      password: Bcrypt.hashSync(content.password, 10),
-      products:[]
-    })
-    obj.save((err,data)=>{
-      if(!err){res.send('user registered')}
-      else{res.send(err)}
-    })
+    res.send({"success":false,"status":400,"message":'no any user',"data":[]})
   }
-})
 
-}
-
-
-
-
-
+ })}
 
 exports.delete_user = (req,res)=>{
     
-    var u_id = req.params.u_id;
-    
-    db.deleteOne({_id: u_id},function (err, doc) {
-           if (doc.deletedCount === 0) {
+  var u_id;
+  jwt.verify(req.headers.token,'supersecret',function(err,data){
+    if(!err){
+        u_id = data._id
+        db.deleteOne({_id: u_id},function (err, doc) {
+          if (doc.deletedCount === 0) {
 
-        res.send("user not exist");
+       res.send({"success":false,"status":400,"message":'user not exist',"data":data});
 
-    } else {
-       res.send("user deleted");
+   } else {
+      res.send({"success":true,"status":200,"message":'user deleted',"data":data});
 
-    }
-    
-})}
+   }
+   
+}) }})}
 
 
 
 
 exports.update_user = (req,res)=>{
     
-    var u_id = req.params.u_id;
+  var u_id;
+  jwt.verify(req.headers.token,'supersecret',function(err,data){
+    if(!err){
+        u_id = data._id
+    }
+  })
     var content = JSON.parse(req.body.toString())
     db.findOneAndUpdate({_id: u_id},content,{new: true},function (err, doc) {
            if (doc === null) {
 
-        res.send("user not exist");
+        res.send({"success":false,"status":400,"message":'user not exist',"data":u_id});
 
     } else {
-       res.send("user updated");
+       res.send({"success":true,"status":200,"message":'user updated',"data":doc});
 
     }
       });
@@ -77,11 +70,16 @@ exports.update_user = (req,res)=>{
 
 exports.get_user = (req,res)=>{
     
-    var u_id = req.params.u_id;
+  var u_id;
+  jwt.verify(req.headers.token,'supersecret',function(err,data){
+    if(!err){
+        u_id = data._id
+    }
+  })
     db.findOne({_id: u_id},function (err, data) {
     if (data === null) {
 
-        res.send("user not exist");
+        res.send({"success":false,"status":400,"message":'user not exist',"data":u_id});
 
     } else {
       db_product.find({obj_id: u_id},function(err,docss){
@@ -95,10 +93,10 @@ exports.get_user = (req,res)=>{
         z.push(obj)
       }
           data.products = z
-          res.send(data)
+          res.send({"success":true,"status":200,"message":'get user',"data":data})
         }
         else{
-          res.send(data)
+          res.send({"success":true,"status":200,"message":'get user',"data":data})
         }
       })
        
