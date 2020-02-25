@@ -2,14 +2,18 @@ var db_product= require('../../models/schemas/product_schema')
 var db_user= require('../../models/schemas/user_schema')
 var db_review= require('../../models/schemas/review_schema')
 
-
+var jwt = require('jsonwebtoken')
 
 
 
 
 exports.create_product = (req,res)=>{
-
-var u_id = req.params.u_id
+var u_id;
+jwt.verify(req.headers.token,'supersecret',function(err,data){
+  if(!err){
+      u_id = data._id
+  }
+})
 
 var content = JSON.parse(req.body.toString())
 
@@ -25,22 +29,22 @@ db_user.findOne({ _id: u_id}, function (err, docs) {
       p_name: content.p_name,
       p_desc: content.p_desc,
       p_image:content.p_image,
-      obj_id: req.params.u_id,
+      obj_id: u_id,
       reviews: []
     })
 
     obj.save((err,data)=>{
-      if(!err){res.send('product entered')}
+      if(!err){res.send({"success":true,"status":200,"message":'product registered',"data":obj})}
       else{res.send(err)}
     })
  }
   else{
-    res.send("user not exist");
+    res.send({"success":false,"status":400,"message":'user not exist',"data":u_id});
   }
 })
     }
     else{
-        res.send('product id already exist')
+        res.send({"success":false,"status":400,"message":'product id already exist',"data":content})
     }
 
 })
@@ -57,10 +61,10 @@ exports.delete_product = (req,res)=>{
     db_product.deleteOne({p_id: u_id},function (err, doc) {
            if (doc.deletedCount === 0) {
 
-        res.send("product not exist");
+        res.send({"success":false,"status":400,"message":'product not exist',"data":u_id});
 
     } else {
-       res.send("product deleted");
+       res.send({"success":true,"status":200,"message":'product deleted',"data":u_id});
 
     }
 })}
@@ -76,10 +80,10 @@ exports.update_product = (req,res)=>{
     db_product.findOneAndUpdate({p_id: pro_id },content,{new: true},function (err, doc) {
            if (doc === null) {
 
-        res.send("product not exist");
+        res.send({"success":false,"status":400,"message":'product not exist',"data":content});
 
     } else {
-       res.send("product updated");
+       res.send({"success":true,"status":200,"message":'product updated',"data":doc});
 
     }
 })}
@@ -87,7 +91,7 @@ exports.update_product = (req,res)=>{
 
 
 
-exports.show_user_products = (req,res)=>{
+exports.show_product = (req,res)=>{
     
     var u_id = req.params.id
     db_product.findOne({p_id : u_id},function(err,doc){
@@ -102,15 +106,15 @@ exports.show_user_products = (req,res)=>{
           })
         z.push(obj)}
             doc.reviews = z
-            res.send(doc)
+            res.send({"success":true,"status":200,"message":'product got',"data":doc})
           }
           else{
-            res.send(doc)
+            res.send({"success":true,"status":200,"message":'product got',"data":doc})
           }
         })
        }       
        else{
-           res.send('no product for this user id')
+           res.send({"success":false,"status":400,"message":'no any product for this id',"data":[]})
        }
     })
     
