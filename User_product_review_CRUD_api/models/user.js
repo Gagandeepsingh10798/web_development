@@ -11,7 +11,7 @@ var userSchema = db.Schema({
 
 userSchema.set('toJSON', {
   transform: function(doc, ret, opt) {
-      delete ret['password']
+      // delete ret['password']
       return ret
   }
 })
