@@ -7,12 +7,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/products');
 var reviewsRouter = require('./routes/reviews');
-
+var cors = require('cors');
 var app = express();
-
+app.use(cors())
 app.use(bodyParser.json())
 
-app.use('/api/auth',indexRouter);
+app.use('/api/auth',static.validations.auth,indexRouter);
 
 
 
@@ -34,8 +34,8 @@ const checkAuth = (req,res,next)=>{
         })}}   
 
 app.use(checkAuth)
-
 app.use('/api/users',usersRouter);
+
 app.use('/api/products',productsRouter);
 app.use('/api/reviews',reviewsRouter);
 

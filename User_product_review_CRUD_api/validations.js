@@ -1,5 +1,3 @@
-const { check, validationResult } = require('express-validator');
-
 var st = {
   "status": {
               "OK":200,
@@ -89,20 +87,12 @@ var st = {
   },
   "validations":{
                         "auth":[
-                                        check('f_name','first name should be more than 2 characters').isLength({ min: 3 }),
-                                        check('l_name','last name should be more than 2 characters').isLength({ min: 3 }),
-                                        check('email','invalid email address').isEmail(),
-                                        check('password','Password should be more than 8 characters').isLength({ min: 9 })
+                                        check('email').isEmail(),
+                                        check('f_name').isLength({ min: 3 }),
+                                        check('l_name').isLength({ min: 3 }),
+                                        check('password').isLength({ min: 9 }),
 
-                               ],
-                        "products":[
-
-                                        check('p_name','first name should be more than 2 characters').isLength({ min: 3 }),
-                                        check('p_desc','last name should be more than 2 characters').isLength({ min: 3 }),
-                                        check('email','invalid email address').isEmail(),
-                                        check('password','Password should be more than 8 characters').isLength({ min: 9 })        
-                                   
-                                   ]
+                               ]
                         
   }
 }
