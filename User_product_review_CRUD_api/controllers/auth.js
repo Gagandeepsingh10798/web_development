@@ -5,8 +5,33 @@ var db = require('../models/user');
 var jwt = require('jsonwebtoken');
 var config = require('../bin/config.json');
 var static = require('../static')
-exports.register = (req,res)=>{
+const { check, validationResult } = require('express-validator');
 
+
+var validator = (req)=>{
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    var msg = {
+                  "msg":errors.errors[0].msg,
+                  "data":{
+                            "value":errors.errors[0].value,
+                            "param":errors.errors[0].param
+                         }
+              };
+    return msg;
+  }
+  else{
+    return false;
+  }
+}
+
+
+exports.register = (req,res)=>{
+  var val = validator(req,res)
+  if( val != false){
+    res.send({"success":false,"status":static.status.ERROR,"message":val.msg,"data":val.data})
+  }
+  else{
   var content = req.body
   db.findOne({email: content.email}, function (err, docs) {
   if(docs !== null){
@@ -26,7 +51,7 @@ exports.register = (req,res)=>{
     })
   }
 })
-
+  }
 }
 
 
