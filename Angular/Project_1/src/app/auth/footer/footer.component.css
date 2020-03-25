@@ -1,0 +1,14 @@
+footer{
+  width:100%;
+	background-color: black;
+	text-align: center;
+	padding-top:10px;
+	padding-bottom: 10px;
+  position: absolute;
+  margin-bottom: 0;
+	width:100%;
+}
+footer p{
+	color: rgb(105, 101, 101);
+}
+

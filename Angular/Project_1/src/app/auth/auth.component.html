@@ -1,0 +1,73 @@
+<app-header></app-header>
+
+<div id="myDIV" class="wrapper" style="background-image: url('/assets/auth/images/bg-registration-form-1.jpg');">
+  <div class="inner">
+    <div class="image-holder">
+      <img src="../../assets/auth/images/registration-form-1.jpg" alt="">
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <h3>Signup Form</h3>
+
+        <div class="form-wrapper">
+        <input type="text" placeholder="First Name" class="form-control" formControlName="firstName"  required minlength="3">
+        <i class="zmdi zmdi-email"  *ngIf="firstName.invalid && (firstName.dirty || firstName.touched) " [ngClass] = "'error'">
+          <small class="text-danger" *ngIf="firstName.errors.required">firstName is required</small>
+          <small class="text-danger" *ngIf="firstName.errors.minlength">
+          firstName must be at least 3 characters long.
+          </small></i>
+        </div>
+
+        <div class="form-wrapper">
+        <input type="text" placeholder="Last Name" class="form-control" formControlName="lastName" required minlength="3">
+        <i class="zmdi zmdi-email" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" [ngClass] = "'error'">
+          <small class="text-danger" *ngIf="lastName.errors.required">lastName is required</small>
+          <small class="text-danger" *ngIf="lastName.errors.minlength">
+          lastName must be at least 3 characters long.
+          </small>
+      </i></div>
+
+
+
+      <div class="form-wrapper">
+        <input type="text" placeholder="Email Address" class="form-control" formControlName="email" required email>
+        <i class="zmdi zmdi-email" *ngIf="email.invalid && (email.dirty || email.touched)">
+          <small class="text-danger" *ngIf="email.errors.required">email is required</small>
+          <small class="text-danger" *ngIf="email.invalid && !email.errors.required">enter valid email address</small>
+        </i>
+      </div>
+
+
+      <div class="form-wrapper">
+        <input type="password" placeholder="Password" class="form-control" formControlName="password" required>
+        <i class="zmdi zmdi-lock"  *ngIf="password.invalid && (password.dirty || password.touched)">
+          <small class="text-danger" *ngIf="password.errors.required">Password is required</small>
+          <small class="text-danger" *ngIf="password.errors.pattern">
+           enter strong password
+          </small>
+        </i>
+      </div>
+
+
+
+      <div class="form-wrapper">
+        <input type="password" placeholder="Confirm Password" class="form-control" formControlName="confirmPassword" required>
+
+        <i class="zmdi zmdi-lock" *ngIf="!password.invalid && registerForm.hasError('notSame')">
+         <small class="text-danger">Password not matched</small>
+        </i>
+      </div>
+
+      <button style="float:left;width:30%">Signup
+        <i class="zmdi zmdi-arrow-right"></i>
+      </button>
+      <button style="float:right;width:60%" routerLink="/auth/login">Already a Member?
+      </button>
+    </form>
+  </div>
+</div>
+
+
+
+
+<app-footer></app-footer>

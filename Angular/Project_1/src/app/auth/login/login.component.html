@@ -1,0 +1,86 @@
+<app-header></app-header>
+<div class="wrapper" style="background-image: url('/assets/auth/images/bg-registration-form-1.jpg');">
+  <div class="inner">
+    <div class="image-holder">
+      <img src="../../assets/auth/images/registration-form-1.jpg" alt="">
+    </div>
+     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h3>Signin Form</h3>
+
+      <div class="form-wrapper">
+        <input type="text" placeholder="Email Address" class="form-control" formControlName="email" required email>
+        <i class="zmdi zmdi-email" *ngIf="email.invalid && (email.dirty || email.touched)">
+          <small class="text-danger" *ngIf="email.errors.required">email is required</small>
+          <small class="text-danger" *ngIf="email.invalid && !email.errors.required">invalid email address</small>
+        </i>
+
+
+
+      </div>
+      <div class="form-wrapper">
+        <input type="password" placeholder="Password" class="form-control" formControlName="password" required>
+        <i class="zmdi zmdi-lock" *ngIf="password.invalid && (password.dirty || password.touched)">
+
+          <small class="text-danger" *ngIf="password.errors.required">Password is required</small></i>
+
+      </div>
+      <a href="#" data-target="#pwdModal" data-toggle="modal"><p style="font-weight: 600;">forgot password?</p></a>
+
+      <button style="float:left;width:30%" >Signin
+        <i class="zmdi zmdi-arrow-right"></i>
+      </button>
+      <button style="float:right;width:60%" routerLink="/auth">Create Account
+        <i class="zmdi zmdi-arrow-right"></i>
+      </button>
+
+
+<!-- forgot password model-->
+      <div id="pwdModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h3 class="text-center">What's My Password?</h3>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                      <div class="panel panel-default">
+                          <div class="panel-body">
+                              <div class="text-center">
+                                <form style="width:100%" [formGroup]="forgotForm" (ngSubmit)="onSubmits()">
+                                <p style="font-weight: 500;">Enter Email to reset PASSWORD</p>
+                                  <div class="panel-body">
+                                        <div class="form-wrapper">
+                                          <input type="text" placeholder="Email Address" class="form-control" formControlName="emailf" required email>
+                                          <i class="zmdi zmdi-email" *ngIf="emailf.invalid && (emailf.dirty || emailf.touched)">
+                                            <small class="text-danger" *ngIf="emailf.errors.required">email is required</small>
+                                            <small class="text-danger" *ngIf="emailf.invalid && !emailf.errors.required">invalid email address</small>
+                                          </i>
+                                        </div>
+                                          <input class="btn btn-lg btn-primary btn-block" value="Send My Password" type="submit">
+
+                                  </div>
+                                </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-12">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            </div>
+            </div>
+        </div>
+        </div>
+
+      </div>
+    <!-- forgot password model-->
+
+    </form>
+  </div>
+</div>
+
+
+
+<app-footer></app-footer>
