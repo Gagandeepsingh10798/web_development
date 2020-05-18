@@ -1,0 +1,18 @@
+<app-header></app-header>
+
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(45).jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{data.f_name + " " +data.l_name}}</h5>
+      <p class="card-text">ID: {{data._id}}</p><br>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">First Name: {{data.f_name}}</li>
+      <li class="list-group-item">Last Name: {{data.l_name}} </li>
+      <li class="list-group-item">Email: {{data.email}}</li>
+    </ul>
+    <div class="card-body">
+        <p class="card-text">Password: {{data.password}}</p><br>
+    </div>
+  </div>
+<app-footer></app-footer>

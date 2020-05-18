@@ -17,7 +17,6 @@ app.use('/api/auth',static.validations.auth,indexRouter);
 
 
 
-
 const checkAuth = (req,res,next)=>{
   if(!req.headers.token){
       res.send({"success":false,"status":static.status.UN_AUTHORIZED,"message":static.message.app.checkAuth,"data":{}})

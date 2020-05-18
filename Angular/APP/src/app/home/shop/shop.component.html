@@ -1,0 +1,51 @@
+<app-header></app-header>
+
+<div class="card" style="margin-top:00px;">
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">INVOICE</h3>
+    <div class="card-body">
+      <div id="table" class="table-editable">
+        <table class="table table-bordered table-responsive-md table-striped text-center" style="margin-top:20px">
+          <thead>
+            <tr>
+              <th class="text-center">Name</th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Quantity</th>
+              <th class="text-center">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products">
+              <td class="pt-3-half" contenteditable="true">{{product.name}}</td>
+              <td class="pt-3-half" contenteditable="true">{{product.price}}</td>
+              <td class="pt-3-half" contenteditable="true">{{product.quant}}</td>
+              <td class="pt-3-half" contenteditable="true">{{product.total}}</td>
+            </tr>
+            <tr>
+                <td class="pt-3-half" contenteditable="false">Bill: </td>
+                <td class="pt-3-half" contenteditable="false">{{bill}}</td>
+                <td><button type="button"
+                      class="btn btn-danger btn-rounded btn-sm my-0" data-toggle="modal" data-target="#exampleModal" >PAY NOW</button>
+
+
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">SCAN QR CODE TO PAY BILL</h5>
+                              
+                            </div>
+                           <p style="text-align: center;"> <img src="../../../assets/img/qr.png" style="width:50%;height:50%"></p>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                              <button type="button" class="btn btn-primary" data-dismiss="modal" routerLink="/payment">YES</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>

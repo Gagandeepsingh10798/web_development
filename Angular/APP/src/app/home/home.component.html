@@ -1,0 +1,20 @@
+<app-header></app-header>
+ 
+<h1 style="text-align: center;margin-top: 50px;">PRODUCTS <i class="fas fa-shopping-cart" routerLink='/shop'></i>{{cart}}</h1>
+
+<div class="row" style="padding: 20px;width:100%">
+<div class="col-md-3" *ngFor="let prod of products">
+    <div class="card mb-2">
+      <img class="card-img-top"
+        src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(45).jpg" alt="Card image cap">
+      <div class="card-body">
+        <h4 class="card-title">{{prod.p_name}}</h4>
+        <p class="card-text">{{prod.p_desc}}</p>
+        <a class="btn btn-primary" (click)="setcart({name:prod.p_name,price:prod.p_price})">ADD PRODUCT</a>
+        <a class="btn btn-primary">Rs.{{prod.p_price}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

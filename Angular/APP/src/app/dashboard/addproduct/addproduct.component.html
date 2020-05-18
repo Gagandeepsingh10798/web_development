@@ -1,0 +1,115 @@
+<app-header></app-header>
+<div *ngIf="!param" id="myDIV" class="wrapper" style="background-image: url('/assets/auth/images/bg-registration-form-1.jpg');">
+  <div class="inner">
+    <div class="image-holder">
+      <img src="../../../assets/auth/images/registration-form-1.jpg" alt="">
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <h3>ADD PRODUCT</h3>
+
+        <div class="form-wrapper">
+        <input type="text" placeholder="Product Name" class="form-control" formControlName="pName"  required minlength="3">
+        <i class="zmdi zmdi-pImage"  *ngIf="pName.invalid && (pName.dirty || pName.touched) " [ngClass] = "'error'">
+          <small class="text-danger" *ngIf="pName.errors.required">pName is required</small>
+          <small class="text-danger" *ngIf="pName.errors.minlength">
+          pName must be at least 3 characters long.
+          </small></i>
+        </div>
+
+        <div class="form-wrapper">
+        <input type="text" placeholder="Product Desc" class="form-control" formControlName="pDesc" required minlength="3">
+        <i class="zmdi zmdi-pImage" *ngIf="pDesc.invalid && (pDesc.dirty || pDesc.touched)" [ngClass] = "'error'">
+          <small class="text-danger" *ngIf="pDesc.errors.required">pDesc is required</small>
+          <small class="text-danger" *ngIf="pDesc.errors.minlength">
+          pDesc must be at least 3 characters long.
+          </small>
+      </i></div>
+
+
+
+      <div class="form-wrapper">
+        <input type="text" placeholder="Product Image" class="form-control" formControlName="pImage" required>
+        <i class="zmdi zmdi-pImage" *ngIf="pImage.invalid && (pImage.dirty || pImage.touched)">
+          <small class="text-danger" *ngIf="pImage.errors.required">pImage is required</small>
+          <small class="text-danger" *ngIf="pImage.invalid && !pImage.errors.required">enter valid pImage address</small>
+        </i>
+      </div>
+
+      <div class="form-wrapper">
+        <input type="text" placeholder="Product Price" class="form-control" formControlName="pPrice" required>
+        <i class="zmdi zmdi-pPrice" *ngIf="pPrice.invalid && (pPrice.dirty || pPrice.touched)">
+          <small class="text-danger" *ngIf="pPrice.errors.required">pPrice is required</small>
+          <small class="text-danger" *ngIf="pPrice.invalid && !pPrice.errors.required">enter valid pPrice address</small>
+        </i>
+      </div>
+
+      <button style="float:left;width:50%">ADD
+        <i class="zmdi zmdi-arrow-right"></i>
+      </button>
+      <button style="float:right;width:30%" routerLink="/dashboard/products">BACK
+      </button>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+<!-- edit user-->
+<div *ngIf="param" id="myDIV" class="wrapper" style="background-image: url('/assets/auth/images/bg-registration-form-1.jpg');">
+<div class="inner">
+    <div class="image-holder">
+      <img src="../../../assets/auth/images/registration-form-1.jpg" alt="">
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmits()">
+
+      <h3>EDIT PRODUCT</h3>
+
+        <div class="form-wrapper">
+        <input type="text" placeholder="Product Name" class="form-control" formControlName="pName" [(ngModel)]="data.p_name" required minlength="3">
+        <i class="zmdi zmdi-pImage"  *ngIf="pName.invalid && (pName.dirty || pName.touched) " [ngClass] = "'error'">
+          <small class="text-danger" *ngIf="pName.errors.required">pName is required</small>
+          <small class="text-danger" *ngIf="pName.errors.minlength">
+          pName must be at least 3 characters long.
+          </small></i>
+        </div>
+
+        <div class="form-wrapper">
+        <input type="text" placeholder="Product Desc" class="form-control" formControlName="pDesc" [(ngModel)]="data.p_desc" required minlength="3">
+        <i class="zmdi zmdi-pImage" *ngIf="pDesc.invalid && (pDesc.dirty || pDesc.touched)" [ngClass] = "'error'">
+          <small class="text-danger" *ngIf="pDesc.errors.required">pDesc is required</small>
+          <small class="text-danger" *ngIf="pDesc.errors.minlength">
+          pDesc must be at least 3 characters long.
+          </small>
+      </i></div>
+
+
+
+      <div class="form-wrapper">
+        <input type="text" placeholder="Product Image" class="form-control" formControlName="pImage" [(ngModel)]="data.p_image" required>
+        <i class="zmdi zmdi-pImage" *ngIf="pImage.invalid && (pImage.dirty || pImage.touched)">
+          <small class="text-danger" *ngIf="pImage.errors.required">pImage is required</small>
+          <small class="text-danger" *ngIf="pImage.invalid && !pImage.errors.required">enter valid pImage address</small>
+        </i>
+      </div>
+
+      <div class="form-wrapper">
+        <input type="text" placeholder="Product Price" class="form-control" formControlName="pPrice" [(ngModel)]="data.p_price" required>
+        <i class="zmdi zmdi-pPrice" *ngIf="pPrice.invalid && (pPrice.dirty || pPrice.touched)">
+          <small class="text-danger" *ngIf="pPrice.errors.required">pPrice is required</small>
+          <small class="text-danger" *ngIf="pPrice.invalid && !pPrice.errors.required">enter valid pPrice address</small>
+        </i>
+      </div>
+
+      <button style="float:left;width:50%">SAVE
+        <i class="zmdi zmdi-arrow-right"></i>
+      </button>
+      <button style="float:right;width:30%" routerLink="/dashboard/products">BACK
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- edit user-->

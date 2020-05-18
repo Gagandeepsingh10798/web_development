@@ -27,6 +27,7 @@ db_user.findOne({ _id: u_id}, function (err, docs) {
       p_id: content.p_id,
       p_name: content.p_name,
       p_desc: content.p_desc,
+      p_price: content.p_price,
       p_image:content.p_image,
       user: u_id,
       reviews:[]
